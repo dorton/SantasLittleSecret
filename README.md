@@ -1,1 +1,1 @@
-## Need an app to to secret santa? well this is your baby.
+## Need an app to secret your santa? well this is your baby.
