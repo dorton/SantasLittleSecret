@@ -21,12 +21,12 @@ end
 
 def create_me(group)
   user = User.new
-  user.first_name = "Brian"
-  user.last_name = "Dorton"
-  user.email = "dorton@gmail.com"
+  user.first_name = "Bob"
+  user.last_name = "Blahblah"
+  user.email = "123@123.com"
   user.password = "12345678"
   user.want = "IDK, an iWatch?"
-  user.remote_profile_image_url = "https://avatars3.githubusercontent.com/u/662645?v=3&s=460"
+  user.remote_profile_image_url = Faker::Avatar.image
   user.famorgs << group
   user.seasons << group.seasons.last
   user.admin = true
