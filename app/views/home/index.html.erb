@@ -1,7 +1,13 @@
-<h1><%= @season.year.strftime('%Y') %> Santa's Little Secret</h1>
-<% @season.users.each do |user| %>
+<h1><%= @famorg.seasons.last.year.strftime('%Y') %> Santa's Little Secret</h1>
+
+<h4>The Participants</h4>
+<% @famorg.users.each do |user| %>
   <%= user.name %>
 <% end %>
 
-
-<%= link_to "Add User", new_user_path, class: "btn" if current_user.admin? %>
+<% if current_user.admin? %>
+<h4>Push Button to Assign Santas</h4>
+<%= button_to "Assign Them Shits", "#", class: "btn" %>
+<% else %>
+<h4>Your Fate Shall Be Sealed Soon</h4>
+<% end %>

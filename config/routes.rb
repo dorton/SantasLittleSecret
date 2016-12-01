@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  resources :seasons do
+  devise_for :users, :path_prefix => 'my'
+  resources :famorgs do
     resources :users
   end
 
