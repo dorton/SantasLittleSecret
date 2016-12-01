@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201062507) do
+ActiveRecord::Schema.define(version: 20161201131015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "writer"
+    t.string   "reader"
+  end
 
   create_table "famorgs", force: :cascade do |t|
     t.string   "name"
@@ -42,6 +50,15 @@ ActiveRecord::Schema.define(version: 20161201062507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_st_nicks_on_user_id", using: :btree
+  end
+
+  create_table "user_comments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_user_comments_on_comment_id", using: :btree
+    t.index ["user_id"], name: "index_user_comments_on_user_id", using: :btree
   end
 
   create_table "user_famorgs", force: :cascade do |t|
@@ -88,6 +105,8 @@ ActiveRecord::Schema.define(version: 20161201062507) do
   add_foreign_key "season_famorgs", "famorgs"
   add_foreign_key "season_famorgs", "seasons"
   add_foreign_key "st_nicks", "users"
+  add_foreign_key "user_comments", "comments"
+  add_foreign_key "user_comments", "users"
   add_foreign_key "user_famorgs", "famorgs"
   add_foreign_key "user_famorgs", "users"
   add_foreign_key "user_seasons", "seasons"

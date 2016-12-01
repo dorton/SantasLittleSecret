@@ -1,27 +1,27 @@
-<%= form_for(user) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
+  <div class="form-inputs">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :want %>
+    <%= f.input :email %>
+    <div class="file-field input-field">
+     <div class="btn">
+       <span>Upload Profile Image</span>
+       <%= f.attachment_field :profile_image %>
+     </div>
+     <div class="file-path-wrapper">
+       <input class="file-path validate" type="text">
+     </div>
+   </div>
+   <%= f.input :remote_profile_image_url, label: "Or specify an image URL" %>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
+
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>
