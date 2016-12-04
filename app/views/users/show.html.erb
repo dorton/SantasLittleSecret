@@ -4,6 +4,9 @@
   <li>Wants: <%= @user.want %></li>
 </ul>
 
+<% if @user == current_user %>
+<%= link_to "Edit Profile", edit_user_path(@user) %>
+<% end %>
 
 <!-- <h3>Leave <%= @user.first_name %> an anonymous message:</h3>
 

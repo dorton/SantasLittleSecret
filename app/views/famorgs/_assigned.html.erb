@@ -1,5 +1,8 @@
 <h4>You are the Secret Santa for:</h4>
 
+<% if @recipient.present? %>
 <h4><%= link_to @recipient.name, user_path(@recipient) %></h4>
-
+<% else %>
+<h4><%= link_to @recipient.email, user_path(@recipient) if current_user.santa.present? %></h4>
+<% end %>
 <h5>Click on their name to find out more bout they.</h5>

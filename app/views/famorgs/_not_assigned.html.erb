@@ -1,0 +1,24 @@
+<% if @users_invitation_accepted.present? %>
+  <h4>The Participants</h4>
+  <% @users_invitation_accepted.each do |user| %>
+    <%= link_to user.name, user_path(user) %>
+  <% end %>
+<% end %>
+
+<% if @users_invitation_not_accepted.present? %>
+  <h4>Invitations Pending</h4>
+  <% @users_invitation_not_accepted.each do |user| %>
+    <%= user.name %> <%= user.email %>
+  <% end %>
+<% end %>
+
+<% if @famorg_admin.admin? %>
+<h4>Push Button to Assign Santas</h4>
+<%= link_to "Assign Them Shits", assign_path(@famorg) %>
+<% else %>
+<h4>Your Fate Shall Be Sealed Soon</h4>
+<% end %>
+
+<% if @famorg_admin.admin? %>
+  <%= link_to "Invite Users", group_invite_path(@famorg), class: "btn btn-primary" %>
+<% end %>

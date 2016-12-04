@@ -1,0 +1,12 @@
+
+<% if @user.last_name.present? %>
+  <h1><%= current_user.name %> Groups</h1>
+  <% @famorgs.each do |group| %>
+    <%= link_to group.name, famorg_path(group), class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <h1>Welcome to Secret Santa</h1>
+
+  <%= render 'update_user' %>
+
+<% end %>

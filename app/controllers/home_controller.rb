@@ -1,24 +1,32 @@
 class HomeController < ApplicationController
-  def index
-    @famorg = Famorg.joins(:users).where('users.id = ?', current_user.id).first
-    @season = Season.where('seasons.year <= ?', Date.today.end_of_year).first
-    @group_season = SeasonFamorg.where(season_id: @season.id).where(famorg_id: @famorg.id)
-    @recipient = User.find(current_user.santa) if current_user.santa.present?
-    @comments = Comment.where("comments.reader = ?", current_user.id.to_s || current_user.santa)
+  before_action :authenticate_user!, :except => [:splash, :email_sent, :invite_users, :group_invite]
+
+
+
+  def splash
   end
 
-  def assign
-    @famorg = Famorg.joins(:users).where('users.id = ?', current_user.id).first
-    @season = Season.where('seasons.year <= ?', Date.today.end_of_year).first
-    @group_season = SeasonFamorg.where(season_id: @season.id).
-                                 where(famorg_id: @famorg.id)
-    if @group_season.first.santas_assigned?
-      redirect_to root_path, notice: 'Assignments Have Been Made. You Have Who You Have.'
-    else
-      Gift.new.assign(@famorg.id, @season.id)
-      @group_season.first.update_attributes(santas_assigned: true)
-      redirect_to root_path, notice: 'Assignments Have Been Made. You Have Who You Have.'
+  def invite_users
+    email = params[:email]
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    def invitor(email, first_name, last_name)
+      user = User.new
+      user.email = email
+      user.first_name = first_name
+      user.last_name = last_name
+      user.invite!
     end
+
+    if User.find_by(email: email).present?
+      redirect_to new_session_path
+    else
+      invitor(email, first_name, last_name)
+      redirect_to email_sent_path
+    end
+  end
+
+  def email_sent
   end
 
 end

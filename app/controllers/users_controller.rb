@@ -6,7 +6,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.santa)
+    if current_user.santa.present?
+      @user = User.find(current_user.santa)
+    else
+      @user = User.find(params[:id])
+    end
     @comments = Comment.where("comments.writer = ?", current_user.id.to_s || current_user.santa)
   end
 
@@ -29,7 +33,7 @@ class UsersController < ApplicationController
   def update
 
       if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.'
+        redirect_to root_path, notice: 'User was successfully updated.'
       else
          render :edit
       end
