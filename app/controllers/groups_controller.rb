@@ -39,7 +39,7 @@ class GroupsController < ApplicationController
       emails = params[:emails].split(",").to_a
       emails.each do |email|
         if User.exists?(email: email)
-          User.find_by(email: email).famorgs << @famorg, notice: "You have been invited into a new group."
+          User.find_by(email: email).famorgs << @famorg
         else
           user = User.new
           user.email = email.gsub("/\n\s+/", "")
