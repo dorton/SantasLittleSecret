@@ -1,15 +1,14 @@
 <h1>Welcome to Secret Santa, <%= current_user.first_name.titleize %>!</h1>
 
-Next steps are pretty simple ones:
+<p>Next steps are pretty simple ones:</p>
+<ol>
+  <li>Create a group.</li>
+  <li>Invite your friends/family/co-workers to that group.</li>
+  <li>Once all have accepted your invitation, you will push the button that randomly assigns everyone their secret santa.</li>
+</ol>
 
-1) Create a group.
-2) Invite your friends/family/co-workers to that group.
-3) Once all have accepted your invitation, you will push the button that randomly assigns everyone their secret santa.
+<p>Ready to get started?</p>
 
-Ready to get started?
-
-Great!
-
-1) Create a group:
+<h3>Create a group:</h3>
 
 <%= render 'form' %>

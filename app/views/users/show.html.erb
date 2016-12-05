@@ -1,8 +1,13 @@
-<%= attachment_image_tag(@user, :profile_image, class: "circle", fallback: 'default_avatar.png') %>
-<h1><%= @user.name %></h1>
-<ul>
-  <li>Wants: <%= @user.want %></li>
-</ul>
+
+<div class="main_header">
+    <div class="row">
+      <div class="col l4"><%= attachment_image_tag(@user, :profile_image, class: "circle responsive-img", id: 'profile', fallback: 'default_avatar.png') %></div>
+      <div class="col l8">
+        <h4><%= @user.name %></h4>
+        <p>Wants: <%= @user.want %></p>
+      </div>
+    </div>
+
 
 <% if @user == current_user %>
 <%= link_to "Edit Profile", edit_user_path(@user) %>

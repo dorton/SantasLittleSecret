@@ -19,7 +19,7 @@ class FamorgsController < ApplicationController
       @user = current_user
       @season = Season.where('seasons.year <= ?', Date.today.end_of_year).first
       @group_season = SeasonFamorg.where(season_id: @season.id).where(famorg_id: @famorg.id)
-      @recipient = User.find(current_user.santa) if current_user.santa.present?
+      @recipient = @famorg.users.find_by(params[:user_id])
       @comments = Comment.where("comments.reader = ?", current_user.id.to_s || current_user.santa)
       @users_invitation_accepted = @famorg.users.invitation_accepted
       @users_invitation_not_accepted = @famorg.users.invitation_not_accepted
@@ -60,6 +60,7 @@ class FamorgsController < ApplicationController
         user.email = email.gsub("/\n\s+/", "")
         user.invite!
         user.famorgs << @famorg
+        user.seasons << Season.where('seasons.year <= ?', Date.today.end_of_year).first
       end
       redirect_to root_path, notice: "#{emails.count} #{'user'.pluralize(emails.count)} invited."
     end

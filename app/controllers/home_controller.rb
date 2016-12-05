@@ -19,10 +19,15 @@ class HomeController < ApplicationController
     end
 
     if User.find_by(email: email).present?
-      redirect_to new_session_path
+      redirect_to new_user_session_path, notice: 'Email already in use, please sign in.'
     else
-      invitor(email, first_name, last_name)
-      redirect_to email_sent_path
+      if email.present?
+        invitor(email, first_name, last_name)
+        redirect_to email_sent_path
+      else
+        redirect_to root_path, notice: 'You must enter an email address.'
+      end
+
     end
   end
 

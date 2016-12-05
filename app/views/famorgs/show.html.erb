@@ -1,19 +1,17 @@
 <% if @user.last_name.present? %>
-
-
-<% if current_user.famorgs.present? %>
-  <h1><%= @famorg.seasons.last.year.strftime('%Y') %> Santa's Little Secret</h1>
-    <% if @group_season.first.santas_assigned? %>
-      <%= render 'assigned' %>
-    <% else %>
-      <%= render 'not_assigned' %>
-    <% end %>
+  <% if current_user.famorgs.present? %>
+  <div class="center">
+    <h1><%= @famorg.seasons.last.year.strftime('%Y') %> <em><%= @famorg.name %></em></h1>
+  </div>
+      <% if @group_season.first.santas_assigned? %>
+        <%= render 'assigned' %>
+      <% else %>
+        <%= render 'not_assigned' %>
+      <% end %>
+  <% else %>
+    <%= render 'no_group' %>
+  <% end %>
 <% else %>
-  <%= render 'no_group' %>
-<% end %>
-<% else %>
-<h1>Welcome to Secret Santa</h1>
-
-<%= render 'update_user' %>
-
+<h1>Welcome to Secret SantApp</h1>
+  <%= render 'update_user' %>
 <% end %>

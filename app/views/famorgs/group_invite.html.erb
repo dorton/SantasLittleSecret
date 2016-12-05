@@ -1,9 +1,9 @@
-<h3>Invite Users to <%= @famorg.name.titleize %></h3>
+<h3>Invite Users to <em><%= @famorg.name.titleize %></em></h3>
 
-<p>Next step, invite your family/friends. Enter their email addresses below separated by a comma.</p>
+<p>Next step, invite your family/friends.</p> <p>Enter their email addresses below separated by a comma.</p>
 
 <%= form_tag(group_invite_path(@famorg), :method => :get) do %>
   <label for="emails">Enter Emails</label>
   <%= text_area_tag :emails, nil, placeholder: "user1@email.com, user2@email.com, user3@email.com ...", rows: 20, cols: 40 %>
-  <%= submit_tag "Submit" %>
+  <%= submit_tag "Submit", class: "btn" %>
 <% end %>

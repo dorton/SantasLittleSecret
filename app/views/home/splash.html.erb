@@ -1,20 +1,35 @@
-<h1>Welcome to Santa's Little Secret</h1>
+ <div class="section">
+   <div class="center"><h1>Welcome to Secret SantApp</h1>
+<%= image_tag 'santa.jpg', class: "responsive-img" %>
+</div>
+    <% if @user.present? %>
+      <h2>Login here - <%= accept_user_invitation_url(:invitation_token => user.raw_invitation_token) %></h2>
+    <% else %>
+    <div class="row center">
+      <h5>Enter your email below to recieve an invitation to proceed.</h5>
+    </div>
+<div class="row">
+  <div class="col s12 m4 l2"></div>
+    <div class="col s12 m4 l8">
+      <%= form_tag(invite_users_path, :method => :get) do %>
+        <label for="first_name">First Name</label>
+        <%= text_field_tag :first_name,nil, required: true %>
+        <label for="last_name">Last Name</label>
+        <%= text_field_tag :last_name, nil, required: true %>
+        <label for="email">Email</label>
+        <%= text_field_tag :email, nil, class: "validate", type: "email" %>
 
-<% if @user.present? %>
-  <h2>Login here - <%= accept_user_invitation_url(:invitation_token => user.raw_invitation_token) %></h2>
-<% else %>
-Enter your email below to recieve an invitation to proceed.
+      <%= submit_tag "Get Started", class: "btn" %>
+     <% end %>
+    </div>
+    <div class="col s12 m4 l2"></div>
+</div>
+</div>
 
+<div class="divider"></div>
 
-<%= form_tag(invite_users_path, :method => :get) do %>
-  <label for="first_name">First Name</label>
-  <%= text_field_tag :first_name %>
-  <label for="last_name">Last Name</label>
-  <%= text_field_tag :last_name %>
-  <label for="email">Email</label>
-  <%= text_field_tag :email %>
- <%= submit_tag "Submit" %>
-<% end %>
-
-Already Registered? <%= link_to "Sign In Here", new_user_session_path %>
-<% end %>
+  <div class="row center section">
+    <h4>Already Registered?</h4>
+    <h4><%= link_to "Sign In Here", new_user_session_path %></h4>
+  </div>
+    <% end %>

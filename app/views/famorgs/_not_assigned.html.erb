@@ -1,24 +1,42 @@
 <% if @users_invitation_accepted.present? %>
-  <h4>The Participants</h4>
-  <% @users_invitation_accepted.each do |user| %>
-    <%= link_to user.name, user_path(user) %>
+  <h4>The Participants</h4><hr>
+  <div class="row">
+    <% @users_invitation_accepted.each do |user| %>
+    <div class="col s12 m7 l4">
+      <div class="card medium">
+        <div class="card-image">
+          <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png') %>
+        </div>
+        <div class="card-action">
+          <p><%= link_to user.name.titleize, user_path(user) %></p>
+        </div>
+      </div>
+    </div>
   <% end %>
+  </div>
 <% end %>
 
 <% if @users_invitation_not_accepted.present? %>
-  <h4>Invitations Pending</h4>
+<h4>Invitations Pending</h4><hr>
+<div class="row">
   <% @users_invitation_not_accepted.each do |user| %>
-    <%= user.name %> <%= user.email %>
-  <% end %>
+  <div class="col s12 m7 l4">
+    <div class="card medium">
+      <div class="card-image">
+        <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png') %>
+      </div>
+      <div class="card-action">
+        <p><%= link_to "#{user.name.titleize} #{user.email}", user_path(user) %></p>
+      </div>
+    </div>
+  </div>
+
+    <% end %>
+</div>
 <% end %>
 
 <% if @famorg_admin.admin? %>
-<h4>Push Button to Assign Santas</h4>
-<%= link_to "Assign Them Shits", assign_path(@famorg) %>
+<%= link_to "Push Button to Assign Santas", assign_path(@famorg), class: "btn btn-large" %>
 <% else %>
 <h4>Your Fate Shall Be Sealed Soon</h4>
-<% end %>
-
-<% if @famorg_admin.admin? %>
-  <%= link_to "Invite Users", group_invite_path(@famorg), class: "btn btn-primary" %>
 <% end %>

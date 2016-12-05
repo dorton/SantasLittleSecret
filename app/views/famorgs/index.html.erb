@@ -1,8 +1,8 @@
 
 <% if @user.last_name.present? %>
-  <h1><%= current_user.name %> Groups</h1>
+  <h1><%= current_user.name.titleize %> Groups</h1>
   <% @famorgs.each do |group| %>
-    <%= link_to group.name, famorg_path(group), class: "btn btn-primary" %>
+    <%= link_to group.name, famorg_path(group), class: "btn" %>
   <% end %>
 <% else %>
   <h1>Welcome to Secret Santa</h1>

@@ -1,48 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SantasLittleSecret</title>
+    <title>Secret SantApp</title>
     <%= csrf_meta_tags %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
-
-  <body>
-    <nav class="red" role="navigation">
-        <div class="nav-wrapper container">
-          <%= link_to '<i class="material-icons md-48">card_giftcard</i>'.html_safe, root_path, class: "brand-logo", id: "logo-container" %>
-          <ul class="right hide-on-med-and-down">
-          <% if user_signed_in? %>
-            <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-            </li>
-          <% else %>
-            <li>
-            <%= link_to('Login', new_user_session_path)  %>
-            </li>
-          <% end %>
-          </ul>
-
-          <ul id="nav-mobile" class="side-nav" style="transform: translateX(-100%);">
-            <li><%= link_to "Secret Santa", root_path %></li>
-          <% if user_signed_in? %>
-            <li>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-            </li>
-          <% else %>
-            <li>
-            <%= link_to('Login', new_user_session_path)  %>
-            </li>
-          <% end %>
-          </ul>
-          <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  <body class="Site">
+      <main class="Site-content">
+        <nav class="red navbar" role="navigation">
+          <%= render 'layouts/navbar' %>
+        </nav>
+        <div class="container">
+          <div class="row">
+            <%= render 'layouts/notifications' %>
+            <%= yield %>
+          </div>
         </div>
-      </nav>
-    <div class="container">
-      <%= yield %>
-    </div>
+        <footer class="page-footer red">
+          <%= render 'layouts/footer' %>
+        </footer>
+      </main>
   </body>
 </html>
