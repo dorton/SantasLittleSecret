@@ -13,6 +13,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
+gem 'slim'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -32,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'thor', '0.19.1'
 gem 'rails_admin', '~> 1.0'
 gem 'devise'
+gem 'devise_invitable', '~> 1.7.0'
 gem 'rails_12factor', group: :production
 gem 'figaro'
 gem 'simple_form'
@@ -42,6 +44,8 @@ gem 'refile', github: 'refile/refile', require: 'refile/rails'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
 gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
 gem 'refile-postgres'
+gem 'materialize-sass'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

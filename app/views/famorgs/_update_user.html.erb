@@ -1,0 +1,24 @@
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.text_area :want, placeholder: "Talk a little bit about what you like." %>
+    <div class="file-field input-field">
+     <div class="btn">
+       <span>Upload Profile Image</span>
+       <%= f.attachment_field :profile_image %>
+     </div>
+     <div class="file-path-wrapper">
+       <input class="file-path validate" type="text">
+     </div>
+     </div>
+       <%= f.input :remote_profile_image_url, label: "Or specify an image URL" %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>

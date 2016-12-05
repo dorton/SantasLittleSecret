@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SantasLittleSecret</title>
+    <title>Secret SantApp</title>
     <%= csrf_meta_tags %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
-
-  <body>
-    <% if user_signed_in? %>
-      <li>
-      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-      </li>
-    <% else %>
-      <li>
-      <%= link_to('Login', new_user_session_path)  %>
-      </li>
-    <% end %>
-    <%= yield %>
+  <body class="Site">
+      <main class="Site-content">
+        <nav class="red navbar" role="navigation">
+          <%= render 'layouts/navbar' %>
+        </nav>
+        <div class="container">
+          <div class="row">
+            <%= render 'layouts/notifications' %>
+            <%= yield %>
+          </div>
+        </div>
+        <footer class="page-footer red">
+          <%= render 'layouts/footer' %>
+        </footer>
+      </main>
   </body>
 </html>

@@ -1,12 +1,1 @@
-<h1><%= @famorg.seasons.last.year.strftime('%Y') %> Santa's Little Secret</h1>
 
-<% if @group_season.first.santas_assigned? %>
-<%= render 'assigned' %>
-<% else %>
-<%= render 'not_assigned' %>
-<% end %>
-
-<!-- <h3>Any Messages?</h3>
-<% @comments.each do |comment| %>
-  <%= comment.body %>
-<% end %> -->

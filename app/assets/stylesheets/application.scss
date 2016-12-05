@@ -1,0 +1,27 @@
+@import "materialize/components/color";
+$primary-color: color("red", "lighten-2") !default;
+$secondary-color: color("green", "base") !default;
+@import 'materialize';
+
+.Site {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+.Site-content {
+  flex: 1 0 auto;
+}
+
+
+#profile {
+  width: 300px;
+}
+
+.main_header img {
+  text-align: right;
+}
+
+.main_header h4 {
+  font-weight: lighter!important;
+}
