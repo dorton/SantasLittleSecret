@@ -38,10 +38,13 @@ class GroupsController < ApplicationController
     if params[:emails].present?
       emails = params[:emails].split(",").to_a
       emails.each do |email|
-        user = User.new
-        user.email = email.gsub("/\n\s+/", "")
-        user.famorgs << @famorg
-        user.invite!
+        if User.exists?(email: email)
+          User.find_by(email: email).famorgs << @famorg, notice: "You have been invited into a new group."
+        else
+          user = User.new
+          user.email = email.gsub("/\n\s+/", "")
+          user.famorgs << @famorg
+          user.invite!
       end
       redirect_to root_path, notice: "#{emails.count} #{'user'.pluralize(emails.count)} invited."
     end
