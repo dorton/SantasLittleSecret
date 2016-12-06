@@ -43,7 +43,7 @@ gem 'jquery-ui-rails'
 gem 'refile', github: 'refile/refile', require: 'refile/rails'
 gem 'refile-mini_magick', github: 'refile/refile-mini_magick'
 gem 'sinatra', github: 'sinatra/sinatra', branch: 'master'
-gem 'refile-postgres'
+gem "refile-s3"
 gem 'materialize-sass'
 
 group :development, :test do
