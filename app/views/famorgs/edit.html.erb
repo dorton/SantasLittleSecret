@@ -1,2 +1,19 @@
-<h1>Famorgs#edit</h1>
-<p>Find me in app/views/famorgs/edit.html.erb</p>
+<h1>Edit <%= @famorg.name %></h1>
+
+<%= render 'form' %>
+
+  <div class="row">
+  <% @famorg.users.each do |user| %>
+    <div class="col s12 m7 l4">
+      <div class="card medium">
+        <div class="card-image">
+          <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png') %>
+        </div>
+        <div class="card-action">
+          <%= link_to user.name, user_path(user) %>
+          <p><%= link_to 'Remove User', remove_user_path(@famorg.id, user.id), class: "btn red", data: { confirm: 'Are you sure?' } unless current_user == user %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>

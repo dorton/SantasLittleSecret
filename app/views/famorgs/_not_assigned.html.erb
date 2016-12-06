@@ -27,9 +27,14 @@
       </div>
       <div class="card-action">
         <p><%= link_to "#{user.name.titleize} #{user.email}", user_path(user) %></p>
+        <% if @famorg_admin.admin? %>
+          <p><%= link_to 'Remove User', remove_user_path(@famorg.id, user.id), data: { confirm: 'Are you sure?' } %></p>
+        <% end %>
       </div>
     </div>
   </div>
+
+
 
     <% end %>
 </div>
@@ -37,6 +42,9 @@
 
 <% if @famorg_admin.admin? %>
 <%= link_to "Push Button to Assign Santas", assign_path(@famorg), class: "btn btn-large" %>
+<%= link_to "Invite More to Group", group_invite_path(@famorg), class: "btn btn-large red" %>
 <% else %>
-<h4>Your Fate Shall Be Sealed Soon</h4>
+<div class="center">
+  <h4>As group admin, <%= @whoisadmin.name %> will be sealing your fate soon.</h4>
+</div>
 <% end %>

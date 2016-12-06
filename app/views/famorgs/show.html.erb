@@ -11,6 +11,14 @@
   <% else %>
     <%= render 'no_group' %>
   <% end %>
+  <% if @famorg_admin.admin? %>
+  <div class="row">
+    <div class="col">
+      <br><%= link_to "Edit Group", edit_famorg_path(@famorg), class: "btn red" %>
+    </div>
+  </div>
+  <% end %>
+
 <% else %>
 <h1>Welcome to Secret SantApp</h1>
   <%= render 'update_user' %>

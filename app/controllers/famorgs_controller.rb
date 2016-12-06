@@ -24,6 +24,7 @@ class FamorgsController < ApplicationController
       @users_invitation_accepted = @famorg.users.invitation_accepted
       @users_invitation_not_accepted = @famorg.users.invitation_not_accepted
       @famorg_admin = UserFamorg.where(user_id: current_user.id).where(famorg_id: @famorg.id).first
+      @whoisadmin = User.joins(:user_famorgs).where('user_famorgs.famorg_id = ?', @famorg.id).where('user_famorgs.admin = ?', true).first
     end
   end
 
@@ -54,13 +55,19 @@ class FamorgsController < ApplicationController
   def group_invite
     @famorg = Famorg.find(params[:famorg_id])
     if params[:emails].present?
-      emails = params[:emails].split(",").to_a
+      emails = params[:emails].split(",").map {|a| a.b.strip}
+      exists = []
+      newbies = []
       emails.each do |email|
-        user = User.where(email: email).first_or_initialize
-        user.email = email.gsub("/\n\s+/", "")
-        user.invite!
-        user.famorgs << @famorg
-        user.seasons << Season.where('seasons.year <= ?', Date.today.end_of_year).first
+        if User.exists?(email: email)
+          User.find_by(email: email).famorgs << @famorg unless User.find_by(email: email).famorgs.include?(@famorg)
+        else
+          user = User.new
+          user.email = email
+          user.invite!
+          user.famorgs << @famorg
+          user.seasons << Season.where('seasons.year <= ?', Date.today.end_of_year).first
+        end
       end
       redirect_to root_path, notice: "#{emails.count} #{'user'.pluralize(emails.count)} invited."
     end
@@ -75,11 +82,26 @@ class FamorgsController < ApplicationController
     else
       Gift.new.assign(@famorg.id, @season.id)
       @group_season.first.update_attributes(santas_assigned: true)
-      redirect_to root_path, notice: 'Assignments Have Been Made. You Have Who You Have.'
+      redirect_to famorg_path(@famorg), notice: 'Assignments Have Been Made. You Have Who You Have.'
     end
   end
 
   def accepted_invite
+  end
+
+  def remove_user
+    @famorg = Famorg.find(params[:famorg_id])
+    @user = User.find(params[:user_id])
+    @famorg.users.delete(@user.id)
+    redirect_to root_path
+  end
+
+  def update
+    if @famorg.update(famorg_params)
+      redirect_to famorg_path(@famorg), notice: 'Group was successfully updated.'
+    else
+       render :edit, notice: 'Something Happened.'
+    end
   end
 
 

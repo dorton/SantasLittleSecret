@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get 'famorgs/:famorg_id/group_invite', to: 'famorgs#group_invite', as: :group_invite
 
+  get 'famorgs/:famorg_id/remove_user/:user_id', to: 'famorgs#remove_user', as: :remove_user
+
   resources :groups
 
 
