@@ -5,9 +5,9 @@
     <div class="col s12 m7 l4">
       <div class="card medium">
         <div class="card-image">
-          <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png') %>
+          <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png', class: "card-image") %>
         </div>
-        <div class="card-action">
+        <div class="card-action center">
           <p><%= link_to user.name.titleize, user_path(user) %></p>
         </div>
       </div>
@@ -25,7 +25,7 @@
       <div class="card-image">
         <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png') %>
       </div>
-      <div class="card-action">
+      <div class="card-action center">
         <p><%= link_to "#{user.name.titleize} #{user.email}", user_path(user) %></p>
         <% if @famorg_admin.admin? %>
           <p><%= link_to 'Remove User', remove_user_path(@famorg.id, user.id), data: { confirm: 'Are you sure?' } %></p>

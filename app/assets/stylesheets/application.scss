@@ -25,3 +25,8 @@ $secondary-color: color("green", "base") !default;
 .main_header h4 {
   font-weight: lighter!important;
 }
+
+.card.small .card-image, .card.medium .card-image, .card.large .card-image {
+    max-height: 100%;
+    overflow: hidden;
+  }
