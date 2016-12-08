@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, :path_prefix => 'my'
 
   authenticate :user do
-    resources :famorgs
+    resources :famorgs do
+      resources :comments
+    end
     resources :users
-    resources :comments
+
   end
 
   authenticated :user do

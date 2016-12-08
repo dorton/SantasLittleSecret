@@ -20,7 +20,7 @@ class FamorgsController < ApplicationController
       @season = Season.where('seasons.year <= ?', Date.today.end_of_year).first
       @group_season = SeasonFamorg.where(season_id: @season.id).where(famorg_id: @famorg.id)
       @recipient = @famorg.users.find_by(params[:user_id])
-      @comments = Comment.where("comments.reader = ?", current_user.id.to_s || current_user.santa)
+      @comments = @famorg.comments
       @users_invitation_accepted = @famorg.users.invitation_accepted
       @users_invitation_not_accepted = @famorg.users.invitation_not_accepted
       @famorg_admin = UserFamorg.where(user_id: current_user.id).where(famorg_id: @famorg.id).first
@@ -111,6 +111,6 @@ private
     end
 
     def famorg_params
-      params.require(:famorg).permit(:name)
+      params.require(:famorg).permit(:name, comment_ids: [])
     end
 end

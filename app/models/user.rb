@@ -5,8 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   attachment :profile_image
   validates :email, presence: true
-  has_many :comments, through: :user_comments, dependent: :destroy
-  has_many :user_comments
+  has_many :comments
   has_many :user_seasons
   has_many :seasons, through: :user_seasons, dependent: :destroy
   has_many :user_famorgs, dependent: :destroy
