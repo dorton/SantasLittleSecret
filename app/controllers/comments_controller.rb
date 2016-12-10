@@ -2,9 +2,9 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
 
-
   def new
-    @comment = Comment.new
+    @famorg = Famorg.find(params[:famorg_id])
+    @comment = @famorg.comments.new
   end
 
   def edit
@@ -14,29 +14,28 @@ class CommentsController < ApplicationController
     @famorg = Famorg.find(params[:famorg_id])
     @comment = @famorg.comments.new(comment_params)
     @comment.user = current_user
-    if @comment.save
-      redirect_to famorg_path(@famorg), notice: "Comment Create"
-    else
-      redirect_to famorg_path(@famorg), notice: "Comment Not Saved"
+    @comment.save!
+
+    respond_to do |format|
+      format.html { redirect_to @famorg }
+      format.json { render json: @famorg }
+      format.js #render comments/create.js.erb
     end
+
   end
 
   def update
-    if @comment.update
-      redirect_to user_path(current_user.santa), notice: "Comment Updated"
-    else
-      redirect_to user_path(current_user.santa), notice: "Comment Not Saved"
-    end
+    @comment.update
   end
 
   def destroy
     @comment.destroy
-    redirect_to user_path(current_user.santa)
   end
 
   private
       def set_comment
-        @comment = Comment.find(params[:id])
+        @famorg = Famorg.find(params[:famorg_id])
+        @comment = @famorg.comments.find(params[:id])
       end
 
       def comment_params

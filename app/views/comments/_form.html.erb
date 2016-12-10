@@ -1,0 +1,11 @@
+<%= simple_form_for([@famorg, @famorg.comments.build], remote: true) do |f| %>
+  <%= f.error_notification %>
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.input :body, label: false, placeholder: "Leave Comment", input_html: { required: true, class: "materialize-textarea", id: "textarea1" } %>
+    </div>
+    <div class="input-field col" id="comment_button">
+      <%= f.button :submit, "Comment", id: "comment_button" %>
+    </div>
+  </div>
+<% end %>

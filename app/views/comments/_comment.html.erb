@@ -1,0 +1,10 @@
+<li>
+  <div class="chip">
+    <%= image_tag attachment_url(comment.user, :profile_image, fallback: "default_avatar.png") %>
+    <%= comment.body %> - <a class="tooltipped" data-position="right" data-delay="50"
+    data-tooltip="<%= comment.created_at.strftime('%m/%d/%Y') %>
+      -<%= comment.user.name %>"><%= local_time(comment.created_at, '%l:%M%P') %></a> <%= link_to "Delete", famorg_comment_path(@famorg, comment),
+      method: :delete,
+      data: { confirm: 'Are you sure?' } if comment.user == current_user %>
+  </div>
+</li>

@@ -2,6 +2,8 @@
 $primary-color: color("red", "lighten-2") !default;
 $secondary-color: color("green", "base") !default;
 @import 'materialize';
+@import 'comments';
+
 
 .Site {
     display: flex;

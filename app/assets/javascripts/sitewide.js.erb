@@ -1,6 +1,8 @@
 $(document).on('turbolinks:load', function() {
   $('select').material_select();
-  $(".dropdown-button").dropdown();
+  $(".dropdown-button").dropdown({
+    belowOrigin: true
+  });
   $(".button-collapse").sideNav();
   $.each($(':checkbox'), function(k, v) { var label = $('label[for="' + this.id + '"]');
       $(this).insertBefore(label); });
