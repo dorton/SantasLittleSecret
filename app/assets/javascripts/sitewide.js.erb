@@ -1,10 +1,20 @@
 $(document).on('turbolinks:load', function() {
+
   $('select').material_select();
+
   $(".dropdown-button").dropdown({
     belowOrigin: true
   });
+
   $(".button-collapse").sideNav();
+
   $.each($(':checkbox'), function(k, v) { var label = $('label[for="' + this.id + '"]');
-      $(this).insertBefore(label); });
+      $(this).insertBefore(label);
+  });
+
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
 
 });

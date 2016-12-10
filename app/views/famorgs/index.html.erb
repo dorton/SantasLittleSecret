@@ -1,9 +1,13 @@
 
 <% if @user.last_name.present? %>
-  <h1><%= current_user.name.titleize %> Groups</h1>
-  <% @famorgs.each do |group| %>
-    <%= link_to group.name, famorg_path(group), class: "btn" %>
-  <% end %>
+  <h1></h1>
+    <ul class="collection with-header">
+      <li class="collection-header"><h4><%= current_user.name.titleize.possessive %> Groups</h4></li>
+      <% @famorgs.each do |group| %>
+        <li class="collection-item"><%= link_to group.name, famorg_path(group), class: "btn" %></li>
+      <% end %>
+    </ul>
+
 <% else %>
   <h1>Welcome to Secret Santa</h1>
 

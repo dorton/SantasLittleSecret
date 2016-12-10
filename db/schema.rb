@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161208013926) do
+ActiveRecord::Schema.define(version: 20161210143853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,11 @@ ActiveRecord::Schema.define(version: 20161208013926) do
 
   create_table "famorgs", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.boolean  "santas_assigned",                         default: false, null: false
+    t.date     "date"
+    t.decimal  "cost",            precision: 5, scale: 2
   end
 
   create_table "season_famorgs", force: :cascade do |t|
@@ -78,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161208013926) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "admin",      default: false, null: false
+    t.integer  "santa_id"
     t.index ["famorg_id"], name: "index_user_famorgs_on_famorg_id", using: :btree
     t.index ["user_id"], name: "index_user_famorgs_on_user_id", using: :btree
   end

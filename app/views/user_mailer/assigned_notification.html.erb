@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @user.name %></h1>
+    <p>
+      Secret Santas for <em><%= @famorg.name %></em> have been assigned.<br>
+    </p>
+    <p>
+      This year, you will be buying a gift for ...
+    </p>
+    <p><br></p>
+    <p><br></p>
+    <p>
+      wait for it...
+    </p>
+    <p><br></p>
+    <p><br></p>
+    <p>
+      <b><h3><%= @santa.name %></h3></b>
+    </p>
+    <p>
+      A couple of reminders:
+      <ul>
+        <li>The cap for cost of gifts for this group is set at - <%= @famorg.cost %> </li>
+        <li>This group is slated to exchange gifts on <b><%= @famorg.date.strftime('%B %d, %Y') %></b></li>
+      </ul>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>

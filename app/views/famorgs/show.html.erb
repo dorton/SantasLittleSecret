@@ -3,7 +3,19 @@
   <div class="center">
     <h1><%= @famorg.seasons.last.year.strftime('%Y') %> <em><%= @famorg.name %></em></h1>
   </div>
-      <% if @group_season.first.santas_assigned? %>
+  <div class="section" id="about_famorg">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>Group Details</h4></li>
+      <% if @famorg.date %>
+      <li class="collection-item"><b>Date of Exchange:</b> <em><%= @famorg.date.strftime('%B %d, %Y') %></em></li>
+      <% end %>
+      <li class="collection-item"><b>Max Cost of Gifts:</b> <em><%= number_to_currency(@famorg.cost) %></em></li>
+      <li class="collection-item"><b>Group admin:</b> <em><%= link_to @whoisadmin.name, user_path(@whoisadmin) %></em></li>
+    </ul>
+  </div>
+  <div class="divider"></div>
+
+      <% if @famorg.santas_assigned? %>
         <%= render 'assigned' %>
       <% else %>
         <%= render 'not_assigned' %>
@@ -19,9 +31,12 @@
   </div>
   <% end %>
 
+
+
+
 <div class="divider"></div>
 
-<div class="section">
+<div class="section discussion">
   <div class="">
     <h3><%= link_to "Discussion", "#", id: "comments-link" %></h3>
     <div class="row">

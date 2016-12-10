@@ -19,7 +19,8 @@ class FamorgsController < ApplicationController
       @user = current_user
       @season = Season.where('seasons.year <= ?', Date.today.end_of_year).first
       @group_season = SeasonFamorg.where(season_id: @season.id).where(famorg_id: @famorg.id)
-      @recipient = @famorg.users.find_by(params[:user_id])
+      @user_famorg = UserFamorg.find_by(famorg_id: @famorg.id, user_id: current_user.id)
+      @recipient = User.find(@user_famorg.santa_id) if @user_famorg.santa_id
       @comments = @famorg.comments
       @users_invitation_accepted = @famorg.users.invitation_accepted
       @users_invitation_not_accepted = @famorg.users.invitation_not_accepted
@@ -75,14 +76,16 @@ class FamorgsController < ApplicationController
 
   def assign
     @famorg = Famorg.find(params[:famorg_id])
+    @users = @famorg.users
     @season = Season.where('seasons.year <= ?', Date.today.end_of_year).first
     @group_season = SeasonFamorg.where(season_id: @season.id).where(famorg_id: @famorg.id)
-    if @group_season.first.santas_assigned?
-      redirect_to root_path, notice: 'Assignments Have Been Made. You Have Who You Have.'
+    if @famorg.santas_assigned?
+      redirect_to root_path, notice: 'Assignments Have Been Made.'
     else
       Gift.new.assign(@famorg.id, @season.id)
-      @group_season.first.update_attributes(santas_assigned: true)
-      redirect_to famorg_path(@famorg), notice: 'Assignments Have Been Made. You Have Who You Have.'
+      @famorg.update_attributes(santas_assigned: true)
+      # UserMailer.assigned_notification(@users).deliver_later
+      redirect_to famorg_path(@famorg), notice: 'Assignments Have Been Made. WooHoo!'
     end
   end
 
@@ -111,6 +114,6 @@ private
     end
 
     def famorg_params
-      params.require(:famorg).permit(:name, comment_ids: [])
+      params.require(:famorg).permit(:name, :cost, :date, :santas_assigned, comment_ids: [])
     end
 end
