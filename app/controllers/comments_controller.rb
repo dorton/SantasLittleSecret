@@ -30,6 +30,11 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @famorg }
+      format.json { render json: @famorg }
+      format.js #render comments/destroy.js.erb
+    end
   end
 
   private

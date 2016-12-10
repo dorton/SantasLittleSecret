@@ -32,3 +32,7 @@ $secondary-color: color("green", "base") !default;
     max-height: 100%;
     overflow: hidden;
   }
+
+li {
+  list-style: none;
+}
