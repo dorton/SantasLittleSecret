@@ -84,7 +84,10 @@ class FamorgsController < ApplicationController
     else
       Gift.new.assign(@famorg.id, @season.id)
       @famorg.update_attributes(santas_assigned: true)
-      # UserMailer.assigned_notification(@users).deliver_later
+      @famorg.users.each do |user|
+        UserMailer.assigned_notification(@famorg, user).deliver_later
+      end
+
       redirect_to famorg_path(@famorg), notice: 'Assignments Have Been Made. WooHoo!'
     end
   end

@@ -4,7 +4,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello, <%= @user.name %></h1>
+    <p>Hello, <%= @user.name %></p>
     <p>
       Secret Santas for <em><%= @famorg.name %></em> have been assigned.<br>
     </p>
@@ -19,12 +19,14 @@
     <p><br></p>
     <p><br></p>
     <p>
-      <b><h3><%= @santa.name %></h3></b>
+      <h2><b><h3><%= @santa.name %></h3></b></h2>
     </p>
+    <p><br></p>
+    <p><br></p>
     <p>
       A couple of reminders:
       <ul>
-        <li>The cap for cost of gifts for this group is set at - <%= @famorg.cost %> </li>
+        <li>The cap for cost of gifts for this group is set at - <%= number_to_currency(@famorg.cost) %> </li>
         <li>This group is slated to exchange gifts on <b><%= @famorg.date.strftime('%B %d, %Y') %></b></li>
       </ul>
     </p>

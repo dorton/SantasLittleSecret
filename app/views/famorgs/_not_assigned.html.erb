@@ -41,7 +41,8 @@
 <% end %>
 
 <% if @famorg_admin.admin? %>
-<%= link_to "Push Button to Assign Santas", assign_path(@famorg), class: "btn btn-large" %>
+<%= link_to "Push Button to Assign Santas", assign_path(@famorg), class: "btn btn-large",
+data: { confirm: 'This will assign randomly assign santas and email everyone their assignments. Shall I proceed?' } %>
 <%= link_to "Invite More to Group", group_invite_path(@famorg), class: "btn btn-large red" %>
 <% else %>
 <div class="center">
