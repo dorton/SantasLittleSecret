@@ -5,6 +5,7 @@
   <div class="row">
     <div class="col m2 l4"></div>
     <div class="col s12 m8 l4">
+      <%= link_to user_path(@recipient) do %>
       <div class="card medium">
         <div class="card-image">
           <%= attachment_image_tag(@recipient, :profile_image, fallback: 'default_avatar.png') %>
@@ -13,6 +14,7 @@
           <p><%= link_to "#{@recipient.name.titleize} #{@recipient.email}", user_path(@recipient) %></p>
         </div>
       </div>
+      <% end %>
     </div>
     <div class="col m2 l4"></div>
   </div>
@@ -25,6 +27,7 @@
     <div class="row">
       <% @users_invitation_accepted.where.not(id: current_user.id).each do |user| %>
       <div class="col s12 m7 l4">
+        <%= link_to user_path(user) do %>
         <div class="card medium">
           <div class="card-image">
             <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png') %>
@@ -33,6 +36,7 @@
             <p><%= user.name.titleize %></p>
           </div>
         </div>
+        <% end %>
       </div>
     <% end %>
     </div>

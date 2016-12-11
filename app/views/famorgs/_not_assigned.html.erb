@@ -3,6 +3,7 @@
   <div class="row">
     <% @users_invitation_accepted.each do |user| %>
     <div class="col s12 m7 l4">
+      <%= link_to user_path(user) do %>
       <div class="card medium">
         <div class="card-image">
           <%= attachment_image_tag(user, :profile_image, fallback: 'default_avatar.png', class: "card-image") %>
@@ -11,6 +12,7 @@
           <p><%= link_to user.name.titleize, user_path(user) %></p>
         </div>
       </div>
+      <% end %>
     </div>
   <% end %>
   </div>
